@@ -1,15 +1,15 @@
-# Permission React Role
+# Role Permission Checks
 Permission React Role is a comprehensive and lightweight solution for managing access control and user permissions in React applications. It offers a range of components, hooks, and helper methods that enable you to easily implement access checks and ensure that users have the appropriate permissions throughout your application.
 # Installation
 Use npm to install: 
 
 ```shell
-npm install react-permission-role
+npm install role-permission-checks
 ```
 Use yarn to install:
 
 ```shell
-yarn add react-permission-role
+yarn add role-permission-checks
 ```
 
 # How to use
@@ -20,11 +20,11 @@ To perform access checks in a specific part of your application, you can use Per
 
 ```javascript
 import React from "react";
-import { PermissionProvider } from "react-permission-role";
+import { PermissionProvider } from "role-permission-checks";
 const App = () => {
     return (
         <PermissionProvider>
-            {/* All the Application layers */}
+            {/* App layers */}
         </PermissionProvider>;
     )
 };
@@ -38,7 +38,7 @@ You can set the user by using the ```usePermission``` hook as follows:-
 
 ```javascript
 
-import { usePermission } from 'react-permission-role';
+import { usePermission } from 'role-permission-checks';
 const { setUser } = usePermission();
 const Userlogin = async (event) => {
     const response = await Login(username, password);
@@ -54,7 +54,7 @@ Or you can use the  ```PermissionContext``` as well as follows:-
 
 ```javascript
 import React from "react";
-import { PermissionContext } from "react-permission-role";
+import { PermissionContext } from "role-permission-checks";
 const Authentication = () => {
     const UserLogin = (setUser) => {
         return async (event) => {
@@ -89,7 +89,7 @@ You can check roles and permissions of the user with giving them as props.
 
 ```javascript
 import React from "react";
-import { AllowedAccess } from "react-permission-role";
+import { AllowedAccess } from "role-permission-checks";
 const ComponentName = () => {
     return (
         <AllowedAccess
@@ -113,7 +113,7 @@ Using isAuthorized through the usePermission hook is as follows:-
 
 ```javascript
 import React, {useState, useEffect} from "react";
-import { usePermission } from "react-permission-role";
+import { usePermission } from "role-permission-checks";
 const ComponentName = () => {
     const { isAuthorized, isLoading } = usePermission();
     useEffect(() => {
@@ -141,3 +141,5 @@ export default ComponentName;
 
 # License
 The MIT License (MIT)
+
+> inspired by [arunkumarbrahmaniya](https://github.com/arunkumarbrahmaniya)
