@@ -1,6 +1,6 @@
 {
   "name": "role-permission-checks",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Role and permissions based access management solution for React applications",
   "author": "Maxwell Ihiaso",
   "license": "MIT License",
