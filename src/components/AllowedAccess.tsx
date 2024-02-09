@@ -31,7 +31,7 @@ const AllowedAccess = ({
     const storedUser = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY_USER));
 
     if(!storedUser) {
-      console.log('There is no user provided for permission! You should set user to perfom the access check');
+      console.log('No user provided for permission! You should set user to perfom the access check');
       return;
     } 
 
@@ -40,13 +40,14 @@ const AllowedAccess = ({
     // check the roles here
     if (roles && storedUser.roles && storedUser.roles.length > 0) {
       const intersection = storedUser.roles.filter((role: any) => roles.includes(role));
-      if (intersection.length > 0) setAllowedAccess(true)
+      setAllowedAccess(intersection.length > 0)
+
     }
 
     // check the permission here
     if (permissions && storedUser.permissions && storedUser.permissions.length > 0) {
       const intersection = storedUser.permissions.filter((permission: any) => permissions.includes(permission));
-      if (intersection.length > 0) setAllowedAccess(true)
+      setAllowedAccess(intersection.length > 0)
     }
 
     setChecking(false)

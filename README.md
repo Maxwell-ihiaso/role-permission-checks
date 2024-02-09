@@ -43,9 +43,9 @@ const { setUser } = usePermission();
 const Userlogin = async (event) => {
     const response = await Login(username, password);
     setUser({
-       id: "userID",
-       roles: ["Role1", "Role2"],
-       permissions: ["add-user", "delete-user", "update-user"]
+        id: "dsf345vnb090",
+        roles: ["root-user", "admin"],
+        permissions: ["read", "update", "delete", "create"]
     })        
 };
 ```
@@ -60,9 +60,9 @@ const Authentication = () => {
         return async (event) => {
             const response = await Login(username, password);
             setUser({
-                id: "userID",
-                roles: ["Role1", "Role2"], 
-                permissions: ["add-user", "delete-user", "update-user"]
+                id: "dsf345vnb090",
+                roles: ["root-user", "admin"],
+                permissions: ["read", "update", "delete", "create"]
             })
         };
     };
@@ -83,9 +83,7 @@ export default Authentication;
 
 ## `AllowedAccess` 
 
-If you have components or UI layers that should only be accessible to users with authorization, you can use the AllowedAccess wrapper component. This component enables you to easily restrict access to certain parts of your application based on the user's permissions. By wrapping these components or UI layers in AllowedAccess, you can ensure that only authorized users are able to access them.
-
-You can check roles and permissions of the user with giving them as props.
+To restrict access to specific components or UI layers based on user permissions, you can utilize the AllowedAccess wrapper component. This component allows you to easily control access to certain parts of your application by wrapping the components or UI layers that require authorization. Additionally, you can pass the user's roles and permissions as props to check and manage access within the AllowedAccess component.
 
 ```javascript
 import React from "react";
@@ -94,8 +92,8 @@ const ComponentName = () => {
     return (
         <AllowedAccess
             roles={["Role1", "Role2"]} 
-            permissions="add-user" 
-            renderAuthFailed={<p>Not Allowed to see this!</p>}
+            permissions="add-user" //optional - roles and paermission set on the component must be passed in order to access the child component
+            renderAuthFailed={<p>No permission to view this module!</p>}
             isLoading={<Spinner/>}
         >
             <button type="button"> Delete </button>
@@ -107,19 +105,17 @@ export default ComponentName;
 
 ## `isAuthorized(roleNames, permissionNames)`
 
-The isAuthorized function is a useful helper method that enables you to determine whether a user is authorized to perform a specific action based on the given parameters. When called, the function returns a Promise that resolves to true if the user is authorized and false otherwise. This allows you to easily perform access checks and ensure that users have the appropriate permissions to perform the desired action.
-
-Using isAuthorized through the usePermission hook is as follows:-
+To limit access to specific components or UI layers based on user permissions, you can employ the AllowedAccess wrapper component. This component facilitates the restriction of certain parts of your application by encapsulating the components or UI layers that necessitate authorization. Furthermore, you can provide the user's roles and permissions as props to validate and regulate access within the AllowedAccess component.
 
 ```javascript
 import React, {useState, useEffect} from "react";
 import { usePermission } from "role-permission-checks";
-const ComponentName = () => {
+const AppComponent = () => {
     const { isAuthorized, isLoading } = usePermission();
     useEffect(() => {
         const fetchData = async () => {
-            // You can send roles and permissions accordingly
-            // Send empty array or null for first param to check permissions only .
+            // Roles and permissions can be provided accordingly 
+            // Use an empty array or null as the first parameter to solely check permissions.
             if (await isAuthorized(["admin", "manager"], "user-delete")) {
                 //next Process
             }
@@ -130,16 +126,15 @@ const ComponentName = () => {
         <>  
             {isLoading && <span>Loading...</span>}
             {dataFetched &&
-                //render the protected component
+                <ProtectedComponent />
             }
-        </>;
+        </ProtectedComponent>;
     )
 };
 
-export default ComponentName;
+export default AppComponent;
 ```
 
 # License
 The MIT License (MIT)
 
-> inspired by [arunkumarbrahmaniya](https://github.com/arunkumarbrahmaniya)
