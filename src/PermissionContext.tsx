@@ -8,6 +8,7 @@ export interface IUserPayload extends PropsWithChildren{
 
 export interface PermissionAuthContext {
     setUser: (user: IUserPayload) => void;
+    deleteUser: () => void;
     isAuthorized: (roleNames?: any[], permissionsNames?: any[]) => Promise<boolean>;
     isLoading: boolean;
 }
@@ -20,6 +21,7 @@ const PermissionContext = createContext<PermissionAuthContext>({
     setUser: noUser,
     isAuthorized: noUser,
     isLoading: false,
+    deleteUser: () => {}
 });
 
 export default PermissionContext;

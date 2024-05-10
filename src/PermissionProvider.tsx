@@ -17,7 +17,14 @@ const PermissionProvider = ({
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const updateUser = (newUser: IUserPayload) => {
+        setIsLoading(true)
+
         localStorage.setItem(LOCAL_STORAGE_KEY_USER, JSON.stringify(newUser));
+        setIsLoading(false)
+    };
+
+    const deleteUser = () => {
+        localStorage.removeItem(LOCAL_STORAGE_KEY_USER);
     };
     
     const isAuthorized = useCallback(async (roleNames: any[], permissionNames?:any[]): Promise<boolean> => {
@@ -59,6 +66,7 @@ const PermissionProvider = ({
 
     return <PermissionContext.Provider value={{
         setUser: updateUser,
+        deleteUser,
         isAuthorized,
         isLoading
     }}>{children}
